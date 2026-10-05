@@ -1,0 +1,167 @@
+1. Java Servlet Program
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Registration</title>
+</head>
+<body>
+
+<h2>Name : ARISHMA R S</h2>
+<h2>Roll Number : 902526</h2>
+<hr>
+
+<h3>Student Registration Form</h3>
+
+<form action="StudentServlet" method="post">
+
+Name:
+<input type="text" name="name"><br><br>
+
+Register Number:
+<input type="text" name="regno"><br><br>
+
+Department:
+<input type="text" name="dept"><br><br>
+
+Email:
+<input type="email" name="email"><br><br>
+
+<input type="submit" value="Submit">
+
+</form>
+
+</body>
+</html>
+
+
+2. JSP with JavaBean
+    
+<html>
+<body>
+
+<h2>Name : ARISHMA R S</h2>
+<h2>Roll Number : 902526</h2>
+<hr>
+
+<h3>Student Registration</h3>
+
+<form action="display.jsp" method="post">
+
+Student Name:
+<input type="text" name="name"><br><br>
+
+Register Number:
+<input type="text" name="regno"><br><br>
+
+Department:
+<input type="text" name="dept"><br><br>
+
+Year:
+<input type="text" name="year"><br><br>
+
+<input type="submit" value="Submit">
+
+</form>
+
+</body>
+</html>
+<jsp:useBean id="student" class="StudentBean" scope="request"/>
+<jsp:setProperty name="student" property="*"/>
+
+<html>
+<body>
+
+<h2>Name : ARISHMA R S</h2>
+<h2>Roll Number : 902526</h2>
+<hr>
+
+<h3>Student Details</h3>
+
+Name :
+<jsp:getProperty name="student" property="name"/><br><br>
+
+Register Number :
+<jsp:getProperty name="student" property="regno"/><br><br>
+
+Department :
+<jsp:getProperty name="student" property="dept"/><br><br>
+
+Year :
+<jsp:getProperty name="student" property="year"/><br><br>
+
+</body>
+</html>
+3. AJAX Program
+
+<?xml version="1.0"?>
+
+<student>
+
+<name>ARISHMA R S</name>
+
+<rollno>902526</rollno>
+
+
+</student>
+<!DOCTYPE html>
+<html>
+<head>
+<title>AJAX Student Details</title>
+
+<script>
+
+function loadStudent() {
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+
+        if(this.readyState == 4 && this.status == 200) {
+
+            var xmlDoc = this.responseXML;
+
+            var name =
+            xmlDoc.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+
+            var roll =
+            xmlDoc.getElementsByTagName("rollno")[0].childNodes[0].nodeValue;
+
+            var dept =
+            xmlDoc.getElementsByTagName("department")[0].childNodes[0].nodeValue;
+
+            var email =
+            xmlDoc.getElementsByTagName("email")[0].childNodes[0].nodeValue;
+
+            document.getElementById("result").innerHTML =
+            "<h3>Student Details</h3>" +
+            "Name : " + name + "<br><br>" +
+            "Roll Number : " + roll + "<br><br>" +
+            "Department : " + dept + "<br><br>" +
+            "Email : " + email;
+        }
+    };
+
+    xhttp.open("GET","student.xml",true);
+    xhttp.send();
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h2>Name : ARISHMA R S</h2>
+<h2>Roll Number : 902526</h2>
+<hr>
+
+<h3>AJAX Student Information</h3>
+
+<button onclick="loadStudent()">
+Get Student Details
+</button>
+
+<div id="result"></div>
+
+</body>
+</html>
